@@ -1,0 +1,151 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+media_folder: static/img
+public_folder: /img
+
+show_preview_links: true
+collections:
+  - name: "settings"
+    label: "Settings"
+    editor: { preview: false }
+    files:
+      - file: "content/settings.json"
+        name: "settings"
+        label: "Site Settings"
+        fields:
+          - label: "About text left"
+            name: "about_copy_left"
+            widget: "markdown"
+            required: false
+            buttons: [bold, italic, link, bulleted-list, numbered-list, heading-two]
+          - label: "About text right"
+            name: "about_copy_right"
+            widget: "markdown"
+            required: false
+            buttons: [bold, italic, link, bulleted-list, numbered-list, heading-two]
+            editor_components: []
+          - label: "Legal text"
+            name: "legal_copy"
+            widget: "markdown"
+            required: false
+            buttons: [bold, italic, link, bulleted-list, numbered-list, heading-two]
+            editor_components: []
+          - label: "Ticket Link"
+            name: "ticket_link"
+            widget: "string"
+            required: false
+          - label: "Meta Title"
+            name: "meta_title"
+            widget: "string"
+            hint: "Will be appear as the title in search results and social media cards."
+            required: false
+          - label: "Meta Description"
+            name: "meta_description"
+            widget: "string"
+            hint: "Might appear in search results and social media cards."
+            required: false
+          - label: "Default Social Media Image"
+            name: "social_image"
+            required: false
+            widget: "image"
+            hint: "Will appear in social media cards. On project pages the featured image will be used instead."
+          - label: "Show work?"
+            name: "show_work"
+            required: true
+            widget: "boolean"
+  - name: "projects"
+    label: "Projects"
+    label_singular: "Project"
+    editor: { preview: false }
+    folder: "content/projects/"
+    preview_path: "/projects/{{slug}}/"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    view_groups:
+      - label: Course
+        field: course
+    fields:
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "project"
+      - label: "Student Name"
+        name: "title"
+        widget: "string"
+      - label: "Kurs"
+        name: "course"
+        widget: "select"
+        options: ["BA", "MA"]
+      - label: "Project Title"
+        name: "project_title"
+        widget: "string"
+        required: false
+      - label: "Betreuender Prof"
+        name: "prof"
+        widget: "string"
+        required: false
+      - label: Is this a draft?
+        name: draft
+        widget: boolean
+        default: false
+        hint: "Draft projects won't appear on the homepage, but can still be accessed through a direct link."
+      - label: "Tags"
+        name: "project_tags"
+        widget: "string"
+        hint: "Separate multiple tags by comma."
+        required: false
+      - label: "Description"
+        name: "body"
+        widget: markdown
+        required: false
+        buttons: [bold, italic, link, bulleted-list, numbered-list]
+        editor_components: []
+      - label: Links
+        name: links
+        required: false
+        max: 5
+        label_singular: link
+        widget: list
+        summary: url
+        fields:
+          - label: URL
+            name: url
+            widget: string
+      - label: Gallery Images
+        label_singular: Gallery Image
+        name: gallery
+        widget: list
+        required: false
+        max: 10
+        fields:
+          - label: Image file
+            name: image
+            hint: JPG, PNG, GIF, and MP4 are supported. Maximum 10MB.
+            widget: image
+            media_library:
+              config:
+                max_file_size: 10000000
+          - label: Alt text
+            name: alt
+            widget: string
+            required: false
+      - label: Featured Image
+        required: false
+        name: featured_image
+        widget: object
+        summary: "{{fields.url}}"
+        fields:
+          - label: Image file
+            name: image
+            widget: "image"
+            hint: "JPG, PNG, and GIF are supported. Maximum 10mb."
+            media_library:
+              config:
+                max_file_size: 10000000
+          - label: Alt text
+            name: alt
+            required: false
+            widget: "string"
