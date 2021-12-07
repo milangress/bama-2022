@@ -13,7 +13,7 @@ gallery:
     alt: Plakat zur Austellung "Der rastlose Körper - zur Bedeutung des Schlafs im
       Spätkapitalismus"
 featured_image:
-  image: /assets/uploads/plakat.jpg
+  image: /img/bildschirmfoto-2021-02-20-um-15.50.26.png
   alt: Plakat zur Austellung "Der rastlose Körper - zur Bedeutung des Schlafs im
     Spätkapitalismus"
 ---
